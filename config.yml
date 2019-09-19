@@ -1,0 +1,22 @@
+# Configuration for Rasa NLU.
+# https://rasa.com/docs/rasa/nlu/components/
+language: en
+pipeline:
+  - name: "CountVectorsFeaturizer"
+  - name: "EmbeddingIntentClassifier"
+    intent_tokenization_flag: true
+    intent_split_symbol: "+"
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+policies:
+  - name: MemoizationPolicy
+    max_history: 5
+  - name: KerasPolicy
+    batch_size: 50
+    epochs: 200
+    max_training_samples: 300
+  - name: MappingPolicy
+  - name: FormPolicy
+  - fallback_action_name: action_default_fallback
+    name: FallbackPolicy
